@@ -1,5 +1,6 @@
 package com.restaurant.app.User.controller;
 
+import com.restaurant.app.User.dto.UserMapper;
 import com.restaurant.app.User.entity.User;
 import com.restaurant.app.User.service.UserService;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,7 @@ public class UserController
 {
     //Inyeccion de dependencia de UserService
     private final UserService userService;
+    private final UserMapper userMapper;
 
     @PostMapping
     public User createUser(@RequestBody User user){

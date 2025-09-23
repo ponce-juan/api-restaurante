@@ -1,2 +1,20 @@
 /mvnw text eol=lf
 *.cmd text eol=crlf
+
+# Archivos de texto → normalizados a LF en el repo
+*.java  text eol=lf
+*.xml   text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+*.md    text eol=lf
+*.sh    text eol=lf
+
+# Scripts de Windows → forzados a CRLF
+*.bat   text eol=crlf
+*.cmd   text eol=crlf
+
+# Binarios → no tocar
+*.jar   binary
+*.png   binary
+*.jpg   binary
+*.gif   binary
