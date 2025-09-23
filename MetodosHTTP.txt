@@ -1,0 +1,27 @@
+Metodos HTTP v1.1:
+    GET -> Obtener recursos
+    POST -> Crear recurso nuevo
+    PUT -> Actualiza toda la informacion del recurso existente
+    DELETE -> Eliminar recurso
+    HEAD ->
+    OPTIONS -> pregunta al servidor que metodos acepta
+    TRACE
+    CONNECT ??
+
+Convencion para armar los endpoints:
+Si el objeto es User, el endpoint va a ser /users (el nombre de la clase en plural), retorna todos los usuarios
+Si se requiere acceder a un objeto en particular, el endpoint va a ser /users/{id} (id es el id del usuario),
+si no se encuentra, retorna error 400;
+
+Se puede manejar las versiones de la API, podemos incluirlo en el endpoint por ejemplo /v1/users
+
+En general, la convencion de usar / entre cada area del endpoint es para mayor especificacion de lo que debe retornar
+
+POST /users -> (body de request, necesita la informacion a almacenar)
+PUT /users/{id} -> (body de request)
+PUT /users -> (body request, <- id obtenido del body)
+DELETE /users -> elimina todos los usuarios (no lo elimina literalmente, solo cambia un estado)
+DELETE /users/{id} -> elimina el usuario con el id (no lo elimina literalmente, solo cambia un estado)
+
+
+
