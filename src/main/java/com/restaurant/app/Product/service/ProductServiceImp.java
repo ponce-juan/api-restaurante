@@ -4,6 +4,8 @@ import com.restaurant.app.Product.entity.Product;
 import com.restaurant.app.Product.repository.ProductRepository;
 import com.restaurant.app.security.jwt.JwtService;
 import io.jsonwebtoken.Claims;
+import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -40,6 +42,11 @@ public class ProductServiceImp implements ProductService
     @Override
     public Product createProduct (Product product)
     {
+        Product prod = productRepository.findByNameIgnoreCaseAndCompanyId(product.getName(), product.getCompany().getId());
+        if(prod != null){
+            throw new RuntimeException("Product already exists");
+        }
+
         return productRepository.save(product);
     }
 
