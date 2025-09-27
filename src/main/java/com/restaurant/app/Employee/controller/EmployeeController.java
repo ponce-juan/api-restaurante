@@ -56,7 +56,7 @@ public class EmployeeController
 
     //Create employee
     @PostMapping
-    public Employee createEmployee (@Valid @RequestBody Employee employee)
+    public Employee createEmployee (@RequestBody Employee employee)
     {
         return employeeService.createEmployee(employee);
     }

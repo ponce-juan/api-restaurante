@@ -57,25 +57,17 @@ Clase hija: Empleado -> nombre, apellido, telefono, email, salario
 @NoArgsConstructor
 @MappedSuperclass
 public abstract class Person {
-    @NotBlank(message = "Name cannot be blank")
     private String name;
 
-    @NotBlank(message = "Last name cannot be blank")
     private String lastName;
 
-    @NotBlank(message = "Phone cannot be blank")
     private String phone;
 
-    //Valido que sea un email valido y no este vacio/null
-    @Email(message = "Email should be valid")
-    @NotBlank(message = "Email cannot be blank")
     private String email;
 
-    @NotBlank(message = "DNI is required")
     @Column(unique = true, nullable = false)
     private String dni;
 
-    @Valid
     @Embedded
     private Address address;
 }

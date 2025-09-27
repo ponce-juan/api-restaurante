@@ -73,7 +73,7 @@ public class EmployeeServiceImp implements EmployeeService
 
     //Create employee
     @Override
-    public Employee createEmployee (@Valid @NonNull Employee employee)
+    public Employee createEmployee ( Employee employee)
     {
         //Si existe el empleado con dni registrado, lanza Excepcion
         employeeRepository.findByDni(employee.getDni())
