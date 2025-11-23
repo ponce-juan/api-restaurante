@@ -8,9 +8,9 @@ public class UserMapper {
 
         return UserDTO.builder()
                 .id(user.getId())
-                .role(user.getEmployee().getRole())
+//                .role(user.getEmployee().getRole())
                 .username(user.getUsername())
-                .employeeId(user.getEmployee() != null ? user.getEmployee().getId() : null)
+//                .employeeId(user.getEmployee() != null ? user.getEmployee().getId() : null)
                 .companyId(user.getCompany() != null ? user.getCompany().getId() : null)
                 .build();
     }

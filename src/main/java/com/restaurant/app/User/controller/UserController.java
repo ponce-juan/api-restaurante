@@ -34,10 +34,10 @@ public class UserController
         user.setUsername(dto.getUsername());
         user.setPassword(dto.getPassword());
 
-        if(dto.getEmployeeId() != null){
-            Employee  employee = employeeService.getEmployeeById(dto.getEmployeeId());
-            user.setEmployee(employee);
-        }
+//        if(dto.getEmployeeId() != null){
+//            Employee  employee = employeeService.getEmployeeById(dto.getEmployeeId());
+//            user.setEmployee(employee);
+//        }
 
         if(dto.getCompanyId() != null){
             Company company = companyService.getCompanyById(dto.getCompanyId());

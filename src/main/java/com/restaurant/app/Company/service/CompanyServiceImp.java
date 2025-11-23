@@ -2,12 +2,15 @@ package com.restaurant.app.Company.service;
 
 import com.restaurant.app.Company.entity.Company;
 import com.restaurant.app.Company.repository.CompanyRepository;
+import com.restaurant.app.CompanyTable.entity.CompanyTable;
 import com.restaurant.app.Utils.StringUtils;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -36,8 +39,8 @@ public class CompanyServiceImp implements CompanyService {
 
         company.setName(StringUtils.isNullOrBlank(companyUpdate.getName()) ? company.getName() :
                 companyUpdate.getName());
-        company.setTablesCount(companyUpdate.getTablesCount() >= 0 ? company.getTablesCount() :
-                companyUpdate.getTablesCount());
+//        company.setTablesCount(companyUpdate.getTablesCount() >= 0 ? company.getTablesCount() :
+//                companyUpdate.getTablesCount());
 
 
         return companyRepository.save(company);
@@ -51,7 +54,7 @@ public class CompanyServiceImp implements CompanyService {
     }
 
     @Override
-    public int getCompanyTables(@NonNull Long id) {
-        return this.getCompanyById(id).getTablesCount();
+    public List<CompanyTable> getCompanyTables(@NonNull Long id) {
+        return this.getCompanyById(id).getTables();
     }
 }

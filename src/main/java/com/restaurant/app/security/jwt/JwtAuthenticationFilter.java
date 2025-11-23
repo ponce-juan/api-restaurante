@@ -42,18 +42,27 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             try{
                 String userId = jwtService.extractAllClaims(token).getSubject();
                 Long companyId = jwtService.extractAllClaims(token).get("companyId", Long.class);
+
                 //Verifico si ya fue autenticado
                 if(userId != null && SecurityContextHolder.getContext().getAuthentication() == null){
                     User user = userRepository.findById(Long.valueOf(userId)).orElse(null);
+
                     //Valido el token obtenido del header
                     if(user != null && jwtService.isTokenValid(token, user)){
                         String role = user.getEmployee().getRole();
 //                      String role = "admin"; // Para desarrollo
                         //Creo el objeto de autenticacion
-                        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                                user, null,
+//                        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+//                                user,
+//                                null,
+//                                List.of(new SimpleGrantedAuthority("ROLE_"+role))
+//                                );
+                        //Creo el objeto de autenticacion
+                        JwtUserAuthentication authToken = new JwtUserAuthentication(
+                                user,
+                                companyId,
                                 List.of(new SimpleGrantedAuthority("ROLE_"+role))
-                                );
+                        );
 
                         authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                         //Seteo la autenticacion en el SecurityContext de spring

@@ -60,6 +60,8 @@ public class SecurityConfig
         CorsConfiguration configuration = new CorsConfiguration();
 //        configuration.setAllowedOriginPatterns(List.of("*")); // Para probar localmente con Thunderclient
         configuration.setAllowedOrigins(List.of("http://localhost:4200")); // Desarrollo local Angular
+        configuration.setAllowedOrigins(List.of("http://192.168.100.110:4200")); //Desarrollo utilizando pc como
+        // servidor
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
 //        configuration.setAllowedHeaders(List.of("*")); //Cualquier header para desarrollo local

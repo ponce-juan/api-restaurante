@@ -2,8 +2,11 @@ package com.restaurant.app.Company.controller;
 
 import com.restaurant.app.Company.entity.Company;
 import com.restaurant.app.Company.service.CompanyService;
+import com.restaurant.app.CompanyTable.entity.CompanyTable;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/companies")
@@ -17,7 +20,7 @@ public class CompanyController {
     }
 
     @GetMapping("/{id}/tables")
-    public int getCompanyTables(@PathVariable("id") Long id){
+    public List<CompanyTable> getCompanyTables(@PathVariable("id") Long id){
         return companyService.getCompanyTables(id);
     }
 

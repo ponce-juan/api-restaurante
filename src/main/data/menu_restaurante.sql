@@ -1,9 +1,51 @@
 -- ==========================================
--- COMPANIAS
+-- COMPANIES
 -- ==========================================
-INSERT INTO companies (name, tables_count) VALUES
-    ('Resto-Pub', 10),
-    ('La Vendetta', 15);
+INSERT INTO companies (name) VALUES
+    ('Resto-Pub'),
+    ('La Vendetta');
+
+-- ==========================================
+-- RESTAURANT TABLES
+-- ==========================================
+-- Mesas para Company 1 (ID = 1)
+-- 10 mesas: 4 OUTDOOR y 6 INDOOR
+
+INSERT INTO company_tables (number, seats, location, status, company_id) VALUES
+(1, 4,  'OUTDOOR', 'AVAILABLE', 1),
+(2, 4,  'OUTDOOR', 'AVAILABLE', 1),
+(3, 4,  'OUTDOOR', 'AVAILABLE', 1),
+(4, 4,  'OUTDOOR', 'AVAILABLE', 1),
+
+(5, 4,  'INDOOR',  'AVAILABLE', 1),
+(6, 4,  'INDOOR',  'AVAILABLE', 1),
+(7, 4,  'INDOOR',  'AVAILABLE', 1),
+(8, 4,  'INDOOR',  'AVAILABLE', 1),
+(9, 4,  'INDOOR',  'AVAILABLE', 1),
+(10, 4, 'INDOOR',  'AVAILABLE', 1);
+
+
+-- Mesas para Company 2 (ID = 2)
+-- 15 mesas: 5 OUTDOOR y 10 INDOOR
+
+INSERT INTO company_tables (number, seats, location, status, company_id) VALUES
+(1, 4,  'OUTDOOR', 'AVAILABLE', 2),
+(2, 4,  'OUTDOOR', 'AVAILABLE', 2),
+(3, 4,  'OUTDOOR', 'AVAILABLE', 2),
+(4, 4,  'OUTDOOR', 'AVAILABLE', 2),
+(5, 4,  'OUTDOOR', 'AVAILABLE', 2),
+
+(6, 4,  'INDOOR', 'AVAILABLE', 2),
+(7, 4,  'INDOOR', 'AVAILABLE', 2),
+(8, 4,  'INDOOR', 'AVAILABLE', 2),
+(9, 4,  'INDOOR', 'AVAILABLE', 2),
+(10, 4, 'INDOOR', 'AVAILABLE', 2),
+(11, 4, 'INDOOR', 'AVAILABLE', 2),
+(12, 4, 'INDOOR', 'AVAILABLE', 2),
+(13, 4, 'INDOOR', 'AVAILABLE', 2),
+(14, 4, 'INDOOR', 'AVAILABLE', 2),
+(15, 4, 'INDOOR', 'AVAILABLE', 2);
+
 
 -- ==========================================
 -- USERS
@@ -27,7 +69,7 @@ INSERT INTO employees (city, country, number, state, street, dni, email, last_na
     '3413413414', 'SUPERVISOR', 5);
 
 -- ==========================================
--- CATEGORÍAS
+-- CATEGORIES
 -- ==========================================
 INSERT INTO categories (id, name) VALUES
 (1, 'Pastas'),
@@ -39,7 +81,7 @@ INSERT INTO categories (id, name) VALUES
 (7, 'Hamburguesas');
 
 -- ==========================================
--- SUBCATEGORÍAS
+-- SUBCATEGORIES
 -- ==========================================
 INSERT INTO subcategories (id, name) VALUES
 -- Generales

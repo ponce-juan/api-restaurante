@@ -2,24 +2,24 @@ package com.restaurant.app.Employee.service;
 
 import com.restaurant.app.Employee.entity.Employee;
 import com.restaurant.app.Employee.repository.EmployeeRepository;
+import com.restaurant.app.User.entity.User;
+import com.restaurant.app.User.service.UserService;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class EmployeeServiceImp implements EmployeeService
 {
     //Inyeccion de dependencia
     private final EmployeeRepository employeeRepository;
-
-    public EmployeeServiceImp (EmployeeRepository employeeRepository)
-    {
-        this.employeeRepository = employeeRepository;
-    }
+    private final UserService userService;
 
     //Get all employees
     @Override
@@ -82,7 +82,13 @@ public class EmployeeServiceImp implements EmployeeService
                               throw new EntityExistsException("Employee already exists with dni: " + employee.getDni());
                           });
 
+        //Verifico si vino user en del front
+        User user = employee.getUser();
+        if(user == null)
+            throw new IllegalArgumentException("User data is required to create an employee.");
         //Si no existe, lo guarda
+
+
         return employeeRepository.save(employee);
     }
 
