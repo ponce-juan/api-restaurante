@@ -2,6 +2,7 @@ package com.restaurant.app.CompanyTable.service;
 
 import com.restaurant.app.Company.entity.Company;
 import com.restaurant.app.Company.repository.CompanyRepository;
+import com.restaurant.app.CompanyTable.dto.CompanyTableDTO;
 import com.restaurant.app.CompanyTable.entity.CompanyTable;
 import com.restaurant.app.CompanyTable.repository.CompanyTableRepository;
 import jakarta.persistence.EntityExistsException;
@@ -19,7 +20,7 @@ public class CompanyTableServiceImp implements CompanyTableService{
     CompanyRepository companyRepository;
 
     @Override
-    public CompanyTable getCompanyTableByNumberAndCompanyId(int tableNumber, @NonNull Long companyId) {
+    public CompanyTableDTO getCompanyTableByNumberAndCompanyId(int tableNumber, @NonNull Long companyId) {
         //Valido si los datos son validos
         if(isNotValidTableNumber(tableNumber))
             throw new IllegalArgumentException("Table number must be greater than 0");
@@ -36,11 +37,12 @@ public class CompanyTableServiceImp implements CompanyTableService{
                     "id " + companyId);
 
         //Si son existe la mesa, la retorno
-        return table;
+        return new CompanyTableDTO(table.getId(), table.getNumber(), table.getSeats(), table.getLocation().name(),
+                table.getStatus().name());
     }
 
     @Override
-    public CompanyTable createCompanyTable(@NonNull Long companyId, @NonNull CompanyTable table) {
+    public CompanyTableDTO createCompanyTable(@NonNull Long companyId, @NonNull CompanyTable table) {
         //Valido la informacion de la mesa
         //Numero de mesa mayor a 0
         if(isNotValidTableNumber(table.getNumber()))
@@ -67,12 +69,16 @@ public class CompanyTableServiceImp implements CompanyTableService{
 
         //Si no existe y los datos son validos, la creo
         table.setCompany(company);
-        return companyTableRepository.save(table);
+
+        CompanyTable t = companyTableRepository.save(table);
+
+        return new CompanyTableDTO(t.getId(), t.getNumber(), t.getSeats(), t.getLocation().name(),
+                t.getStatus().name());
 
     }
 
     @Override
-    public CompanyTable updateCompanyTable(@NonNull Long companyId, @NonNull CompanyTable table) {
+    public CompanyTableDTO updateCompanyTable(@NonNull Long companyId, @NonNull CompanyTable table) {
 
         //Valido si existe una mesa con el mismo numero en la compania y
         // si tiene el mismo id que la mesa a actualizar
@@ -105,7 +111,10 @@ public class CompanyTableServiceImp implements CompanyTableService{
         tableToUpdate.setLocation(table.getLocation());
         tableToUpdate.setStatus(table.getStatus());
 
-        return companyTableRepository.save(tableToUpdate);
+        CompanyTable t = companyTableRepository.save(tableToUpdate);
+
+        return new CompanyTableDTO(t.getId(), t.getNumber(), t.getSeats(), t.getLocation().name(),
+                t.getStatus().name());
     }
 
     @Override
@@ -134,12 +143,16 @@ public class CompanyTableServiceImp implements CompanyTableService{
     }
 
     @Override
-    public List<CompanyTable> getCompanyTablesByCompanyId(@NonNull Long companyId) {
+    public List<CompanyTableDTO> getCompanyTablesByCompanyId(@NonNull Long companyId) {
         //Valido que el id de la compania sea valido
         if(isNotValidCompanyId(companyId))
             throw new IllegalArgumentException("Company id must be greater than 0");
 
-        return companyTableRepository.findByCompanyId(companyId);
+        return companyTableRepository.findByCompanyId(companyId)
+                .stream()
+                .map( t -> new CompanyTableDTO(t.getId(), t.getNumber(), t.getSeats(), t.getLocation().name(),
+                        t.getStatus().name()))
+                .toList();
     }
 
 

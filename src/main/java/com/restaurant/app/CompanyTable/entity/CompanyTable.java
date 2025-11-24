@@ -1,5 +1,6 @@
 package com.restaurant.app.CompanyTable.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.restaurant.app.Company.entity.Company;
 import com.restaurant.app.CompanyTable.model.TableLocationEnum;
 import com.restaurant.app.CompanyTable.model.TableStatusEnum;
@@ -33,6 +34,7 @@ public class CompanyTable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id", nullable = false)
+    @JsonIgnore
     private Company company;
 
 }

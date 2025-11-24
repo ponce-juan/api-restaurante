@@ -1,5 +1,6 @@
 package com.restaurant.app.CompanyTable.controller;
 
+import com.restaurant.app.CompanyTable.dto.CompanyTableDTO;
 import com.restaurant.app.CompanyTable.entity.CompanyTable;
 import com.restaurant.app.CompanyTable.service.CompanyTableService;
 import com.restaurant.app.Utils.SecurityUtils;
@@ -15,7 +16,7 @@ public class CompanyTableController {
     private final CompanyTableService companyTableService;
 
     @GetMapping
-    public List<CompanyTable> getCompanyTablesByCompanyId(){
+    public List<CompanyTableDTO> getCompanyTablesByCompanyId(){
         Long companyId = SecurityUtils.getCompanyId();
         System.out.println("Retrieved Company ID from security context: " + companyId);
         if(companyId == null)
@@ -26,7 +27,7 @@ public class CompanyTableController {
     }
 
     @GetMapping("/{tableNumber}")
-    public CompanyTable getCompanyTableByNumberAndCompanyId(@PathVariable("tableNumber") int tableNumber){
+    public CompanyTableDTO getCompanyTableByNumberAndCompanyId(@PathVariable("tableNumber") int tableNumber){
         Long companyId = SecurityUtils.getCompanyId();
         if(companyId == null)
             throw new IllegalStateException("Company ID not found in security context");
@@ -45,7 +46,7 @@ public class CompanyTableController {
     }
 
     @PostMapping
-    public CompanyTable createCompanyTable(@RequestBody CompanyTable table){
+    public CompanyTableDTO createCompanyTable(@RequestBody CompanyTable table){
         Long companyId = SecurityUtils.getCompanyId();
         if(companyId == null)
             throw new IllegalStateException("Company ID not found in security context");
@@ -54,7 +55,7 @@ public class CompanyTableController {
     }
 
     @PutMapping("/{tableId}")
-    public CompanyTable updateCompanyTable(@PathVariable("tableId") Long tableId, @RequestBody CompanyTable table){
+    public CompanyTableDTO updateCompanyTable(@PathVariable("tableId") Long tableId, @RequestBody CompanyTable table){
         Long companyId = SecurityUtils.getCompanyId();
         if(companyId == null)
             throw new IllegalStateException("Company ID not found in security context");
