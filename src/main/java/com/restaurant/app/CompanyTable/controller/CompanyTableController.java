@@ -17,6 +17,7 @@ public class CompanyTableController {
     @GetMapping
     public List<CompanyTable> getCompanyTablesByCompanyId(){
         Long companyId = SecurityUtils.getCompanyId();
+        System.out.println("Retrieved Company ID from security context: " + companyId);
         if(companyId == null)
             throw new IllegalStateException("Company ID not found in security context");
 

@@ -29,7 +29,7 @@ public class CompanyTableServiceImp implements CompanyTableService{
             throw new IllegalArgumentException("Company id must be greater than 0");
 
         //Busco la mesa
-        CompanyTable table = companyTableRepository.findByTableNumberAndCompanyId(tableNumber, companyId);
+        CompanyTable table = companyTableRepository.findByNumberAndCompanyId(tableNumber, companyId);
 
         if( table == null)
             throw new IllegalArgumentException("Table with number " + tableNumber + " doesn't exist in company with " +
@@ -59,7 +59,7 @@ public class CompanyTableServiceImp implements CompanyTableService{
             throw new IllegalArgumentException("Table status must be AVAILABLE, OCCUPIED or RESERVED");
 
         //Si existe la mesa con el mismo numero y pertenece a la misma compania, lanzo excepcion
-        if(companyTableRepository.findByTableNumberAndCompanyId(table.getNumber(), companyId) == null)
+        if(companyTableRepository.findByNumberAndCompanyId(table.getNumber(), companyId) == null)
             throw new EntityExistsException("Table with number " + table.getNumber() + " already exists in company with id " + companyId);
 
         Company company = companyRepository.findById(companyId)
@@ -76,7 +76,7 @@ public class CompanyTableServiceImp implements CompanyTableService{
 
         //Valido si existe una mesa con el mismo numero en la compania y
         // si tiene el mismo id que la mesa a actualizar
-        CompanyTable existingTable = companyTableRepository.findByTableNumberAndCompanyId(table.getNumber(), companyId);
+        CompanyTable existingTable = companyTableRepository.findByNumberAndCompanyId(table.getNumber(), companyId);
 
         if(existingTable != null && !existingTable.getId().equals(table.getId()))
             throw new IllegalArgumentException("Table with number " + table.getNumber() + " already exists in company with id " + companyId);
@@ -118,7 +118,7 @@ public class CompanyTableServiceImp implements CompanyTableService{
             throw new IllegalArgumentException("Table number must be greater than 0");
 
         //Si los datos son validos, busco si existe la mesa
-        CompanyTable table = companyTableRepository.findByTableNumberAndCompanyId(tableNumber, companyId);
+        CompanyTable table = companyTableRepository.findByNumberAndCompanyId(tableNumber, companyId);
 
         //Si no se encontro mesa, lanzo excepcion
         if(table == null)
