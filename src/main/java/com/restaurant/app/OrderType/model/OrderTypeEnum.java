@@ -4,6 +4,5 @@ public enum OrderTypeEnum
 {
     TAKE_AWAY,
     DELIVERY,
-    DINE_IN,
-    RESERVATION
+    DINE_IN
 }

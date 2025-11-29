@@ -61,7 +61,7 @@ public class CompanyTableServiceImp implements CompanyTableService{
             throw new IllegalArgumentException("Table status must be AVAILABLE, OCCUPIED or RESERVED");
 
         //Si existe la mesa con el mismo numero y pertenece a la misma compania, lanzo excepcion
-        if(companyTableRepository.findByNumberAndCompanyId(table.getNumber(), companyId) == null)
+        if(companyTableRepository.findByNumberAndCompanyId(table.getNumber(), companyId) != null)
             throw new EntityExistsException("Table with number " + table.getNumber() + " already exists in company with id " + companyId);
 
         Company company = companyRepository.findById(companyId)

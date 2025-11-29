@@ -173,3 +173,10 @@ INSERT INTO products (id, name, description, price, stock, category_id, subcateg
 (27, 'Hamburguesa clásica', 'Medallón de carne, lechuga, tomate y cheddar', 9500, 60, 7, 26,2),
 (28, 'Hamburguesa doble cheddar', 'Doble carne, doble cheddar, panceta', 12500, 45, 7, 27,1),
 (29, 'Hamburguesa veggie', 'Medallón de lentejas, palta y vegetales', 10500, 40, 7, 27,1);
+
+-- ==========================================
+-- ORDERS TYPES
+-- ==========================================
+INSERT INTO order_types (type_name) VALUES ('TAKE_AWAY');
+INSERT INTO order_types (type_name) VALUES ('DELIVERY');
+INSERT INTO order_types (type_name) VALUES ('DINE_IN');

@@ -16,22 +16,22 @@ public class OrderTypeController
     // Dependency Injection
     private final OrderTypeService orderTypeService;
     //
-     public OrderTypeController(OrderTypeService orderTypeService)
+    public OrderTypeController(OrderTypeService orderTypeService)
      {
          this.orderTypeService = orderTypeService;
      }
 
-     //Get all order types
-     @GetMapping
-     public List<OrderType> getAllOrderTypes()
-     {
-         try{
-            return orderTypeService.getAllOrderTypes();
-         } catch ( EntityNotFoundException e ){
-                System.out.println(e.getMessage());
-                return null;
-         }
-     }
+    //Get all order types
+    @GetMapping
+    public List<OrderType> getAllOrderTypes()
+    {
+        try{
+           return orderTypeService.getAllOrderTypes();
+        } catch ( EntityNotFoundException e ){
+               System.out.println(e.getMessage());
+               return null;
+        }
+    }
     //Get order type by id
     @GetMapping("/{id}")
     public OrderType getOrderTypeById(@PathVariable Long id){

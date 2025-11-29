@@ -6,22 +6,18 @@ import com.restaurant.app.OrderType.repository.OrderTypeRepository;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class OrderTypeServiceImp implements OrderTypeService
 {
     // Dependency Injection
     private final OrderTypeRepository orderTypeRepository;
-
-    public OrderTypeServiceImp (OrderTypeRepository orderTypeRepository)
-    {
-        this.orderTypeRepository = orderTypeRepository;
-    }
-
 
     @Override
     public List<OrderType> getAllOrderTypes ()

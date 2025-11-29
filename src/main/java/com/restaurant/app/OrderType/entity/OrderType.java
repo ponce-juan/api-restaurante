@@ -1,5 +1,6 @@
 package com.restaurant.app.OrderType.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.restaurant.app.OrderCustomer.entity.OrderCustomer;
 import com.restaurant.app.OrderType.model.OrderTypeEnum;
 import jakarta.persistence.*;
@@ -37,6 +38,7 @@ public class OrderType
         cascade = CascadeType.ALL,
         fetch = FetchType.LAZY,
         orphanRemoval = true)
+    @JsonIgnore
     private List<OrderCustomer> orders = new ArrayList<>();
 
 }
