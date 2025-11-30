@@ -9,5 +9,6 @@ import java.util.List;
 @Repository
 public interface CompanyTableRepository extends JpaRepository<CompanyTable, Long> {
     CompanyTable findByNumberAndCompanyId(int tableNumber, Long companyId);
+    CompanyTable findByIdAndCompanyId(Long tableId, Long companyId);
     List<CompanyTable> findByCompanyId(Long companyId);
 }

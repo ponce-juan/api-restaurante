@@ -1,5 +1,6 @@
 package com.restaurant.app.Product.service;
 
+import com.restaurant.app.Product.dto.ProductDTO;
 import com.restaurant.app.Product.entity.Product;
 
 import java.util.List;
@@ -7,15 +8,15 @@ import java.util.List;
 public interface ProductService
 {
     // Operaciones CRUD para la entidad Product
-    List<Product> getAllProducts();
-    Product getProductById(Long id);
-    Product createProduct(Product product);
-    Product updateProduct(Long id, Product product);
+    List<ProductDTO> getAllProducts();
+    ProductDTO getProductById(Long id);
+    ProductDTO createProduct(Product product);
+    ProductDTO updateProduct(Long id, Product product);
     void deleteProduct(Long id);
 
     // Otras operaciones extras
-    List<Product> getProductsByCategoryId(Long categoryId);
-    List<Product> getProductsBySubCategoryId(Long subCategoryId);
-    List<Product> getProductsByName(String name);
+    List<ProductDTO> getProductsByCategoryId(Long categoryId);
+    List<ProductDTO> getProductsBySubCategoryId(Long subCategoryId);
+    List<ProductDTO> getProductsByName(String name);
 
 }

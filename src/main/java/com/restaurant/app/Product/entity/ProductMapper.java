@@ -7,6 +7,7 @@ public class ProductMapper {
         if(p == null) return null;
 
         return  ProductDTO.builder()
+                .id(p.getId())
                 .name(p.getName())
                 .description(p.getDescription())
                 .price(p.getPrice())
@@ -20,10 +21,10 @@ public class ProductMapper {
         if(dto == null) return null;
 
         Product prod = new Product();
-        prod.setName(dto.getName());
-        prod.setDescription(dto.getDescription());
-        prod.setPrice(dto.getPrice());
-        prod.setStock(dto.getStock());
+        prod.setName(dto.name());
+        prod.setDescription(dto.description());
+        prod.setPrice(dto.price());
+        prod.setStock(dto.stock());
         // No category/subcategory/company
         return prod;
     }

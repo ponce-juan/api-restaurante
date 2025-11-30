@@ -62,7 +62,7 @@ public class CompanyTableServiceImp implements CompanyTableService{
 
         //Si existe la mesa con el mismo numero y pertenece a la misma compania, lanzo excepcion
         if(companyTableRepository.findByNumberAndCompanyId(table.getNumber(), companyId) != null)
-            throw new EntityExistsException("Table with number " + table.getNumber() + " already exists in company with id " + companyId);
+            throw new EntityExistsException("Table with number " + table.getNumber() + " already exists.");
 
         Company company = companyRepository.findById(companyId)
                 .orElseThrow(() -> new IllegalArgumentException("Company with id " + companyId + " doesn't exist"));
@@ -82,11 +82,21 @@ public class CompanyTableServiceImp implements CompanyTableService{
 
         //Valido si existe una mesa con el mismo numero en la compania y
         // si tiene el mismo id que la mesa a actualizar
-        CompanyTable existingTable = companyTableRepository.findByNumberAndCompanyId(table.getNumber(), companyId);
 
-        if(existingTable != null && !existingTable.getId().equals(table.getId()))
-            throw new IllegalArgumentException("Table with number " + table.getNumber() + " already exists in company with id " + companyId);
+        CompanyTable existingTableByNumber = companyTableRepository.findByNumberAndCompanyId(table.getNumber(), companyId);
+        CompanyTable existingTableById = companyTableRepository.findByIdAndCompanyId(table.getId(), companyId);
+        //SI existe una mesa
+        //y el numero de la mesa existente es igual al numero de la mesa a actualizar
+        if(existingTableByNumber!= null && existingTableById != null){
+            System.out.println("by ID: id" + existingTableById.getId());
+            System.out.println("by ID: number" + existingTableById.getNumber());
+            System.out.println("b---------------------------------------------------");
+            System.out.println("by Number: id" + existingTableByNumber.getId());
+            System.out.println("by Number: number" + existingTableByNumber.getNumber());
+        }
 
+        if(existingTableByNumber != null  && existingTableById != null && !existingTableById.getId().equals(existingTableByNumber.getId()))
+            throw new IllegalArgumentException("Table with number " + table.getNumber() + " already exists.");
 
         //Valido que los datos ingresados sean validos
         if(isNotValidCompanyId(companyId))
@@ -131,11 +141,10 @@ public class CompanyTableServiceImp implements CompanyTableService{
 
         //Si no se encontro mesa, lanzo excepcion
         if(table == null)
-            throw new IllegalArgumentException("Table with number " + tableNumber + " doesn't exist in company with " +
-                    "id " + companyId);
+            throw new IllegalArgumentException("Table with number " + tableNumber + " doesn't exist.");
 
         //Si la mesa no esta disponible, no la puedo eliminar
-        if(isNotValidToDelete(table))
+        if(isNotAvailableToDelete(table))
             throw new IllegalArgumentException("Table with number " + tableNumber + " is not available to be deleted");
 
         //Si existe, la elimino
@@ -174,7 +183,7 @@ public class CompanyTableServiceImp implements CompanyTableService{
         return companyId == null || companyId < 1;
     }
 
-    private boolean isNotValidToDelete(CompanyTable table){
+    private boolean isNotAvailableToDelete(CompanyTable table){
         return table.getStatus() != null && !table.getStatus().name().equals("AVAILABLE");
     }
 }

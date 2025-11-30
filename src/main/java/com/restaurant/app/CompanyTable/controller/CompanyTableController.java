@@ -60,7 +60,7 @@ public class CompanyTableController {
         if(companyId == null)
             throw new IllegalStateException("Company ID not found in security context");
 
-        table.setId(tableId);
+//        table.setId(tableId);
         return companyTableService.updateCompanyTable(companyId, table);
     }
 
