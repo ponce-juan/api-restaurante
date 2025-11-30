@@ -12,8 +12,8 @@ public class ProductMapper {
                 .description(p.getDescription())
                 .price(p.getPrice())
                 .stock(p.getStock())
-                .categoryName(p.getCategory() != null ? p.getCategory().getName() : null)
-                .subcategoryName(p.getSubCategory() != null ? p.getSubCategory().getName() : null)
+                .category(p.getCategory() != null ? p.getCategory().getName() : null)
+                .subCategory(p.getSubCategory() != null ? p.getSubCategory().getName() : null)
                 .build();
     }
 
