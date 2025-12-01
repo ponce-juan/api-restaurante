@@ -8,6 +8,11 @@ COPY pom.xml .
 COPY src src
 
 RUN chmod +x ./mvnw
+
+#Instalacion wget
+RUN  apt-get update && apt-get install -y wget
+
+#Compilar el proyecto
 RUN ./mvnw clean package -DskipTests
 
 # Runtime solo el .jar
