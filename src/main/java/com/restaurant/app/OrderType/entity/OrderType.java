@@ -5,6 +5,7 @@ import com.restaurant.app.OrderCustomer.entity.OrderCustomer;
 import com.restaurant.app.OrderType.model.OrderTypeEnum;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,11 +35,12 @@ public class OrderType
 
     //Relacion muchas OrderCustomer pueden tener un mismo OrderType
     @OneToMany(
-        mappedBy = "orderType",
+        mappedBy = "type",
         cascade = CascadeType.ALL,
         fetch = FetchType.LAZY,
         orphanRemoval = true)
     @JsonIgnore
+    @ToString.Exclude
     private List<OrderCustomer> orders = new ArrayList<>();
 
 }

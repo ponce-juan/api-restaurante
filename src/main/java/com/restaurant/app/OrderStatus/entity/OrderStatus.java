@@ -4,8 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.restaurant.app.OrderCustomer.entity.OrderCustomer;
 import com.restaurant.app.OrderStatus.model.OrderStatusEnum;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +21,8 @@ import java.util.List;
 * 8. RECIBIDO
 * */
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "status")
 @NoArgsConstructor
@@ -39,13 +39,11 @@ public class OrderStatus
     private OrderStatusEnum status;
 
     @OneToMany(
-        mappedBy = "orderStatus",
+        mappedBy = "status",
         cascade = CascadeType.ALL,
         fetch = FetchType.LAZY,
         orphanRemoval = true)
     @JsonIgnore
+    @ToString.Exclude
     private List<OrderCustomer> orders = new ArrayList<>();
-
-
-
 }

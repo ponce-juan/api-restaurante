@@ -5,6 +5,7 @@ import com.restaurant.app.Product.entity.Product;
 import com.restaurant.app.common.embedded.OrderItemId;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 
@@ -23,12 +24,14 @@ public class OrderItem
 //Many OrderItem can have one OrderCustomer
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "order_customer_id", nullable = false)
+    @ToString.Exclude
     private OrderCustomer orderCustomer;
 
 //Many OrderItem can have one Product
     @ManyToOne(fetch=FetchType.LAZY)
 //    @MapsId("productId") //Field name in OrderItemId
     @JoinColumn(name = "product_id", nullable = false)
+    @ToString.Exclude
     private Product product;
 
     private int quantity;

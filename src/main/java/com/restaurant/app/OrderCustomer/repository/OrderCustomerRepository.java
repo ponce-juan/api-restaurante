@@ -11,10 +11,10 @@ package com.restaurant.app.OrderCustomer.repository;
 //@Repository
 //public interface OrderCustomerRepository extends JpaRepository<OrderCustomer, Long>
 //{
-//    Optional<List<OrderCustomer>> findByOrderStatus_Id (@NonNull Long orderStatusId);
-//    Optional<List<OrderCustomer>> findByOrderStatus_IdAndCustomer_Id (@NonNull Long orderStatusId,
+//    Optional<List<OrderCustomer>> findByStatus_Id (@NonNull Long orderStatusId);
+//    Optional<List<OrderCustomer>> findByStatus_Id (@NonNull Long orderStatusId,
 //                                                                  @NonNull Long customerId);
-//    Optional<List<OrderCustomer>> findByOrderType_Id (@NonNull Long orderTypeId);
+//    Optional<List<OrderCustomer>> findByType_Id (@NonNull Long orderTypeId);
 //}
 
 
@@ -28,9 +28,10 @@ import java.util.List;
 @Repository
 public interface OrderCustomerRepository extends JpaRepository<OrderCustomer, Long> {
 
-    List<OrderCustomer> findByOrderStatus_Id(Long orderStatusId);
+    List<OrderCustomer> findByStatus_Id(Long orderStatusId);
 
-    List<OrderCustomer> findByOrderStatus_IdAndCustomer_Id(Long orderStatusId, Long customerId);
+//    List<OrderCustomer> findByStatus_Id(Long orderStatusId);
+//    List<OrderCustomer> findByStatus_Id(Long orderStatusId, Long customerId);
 
-    List<OrderCustomer> findByOrderType_Id(Long orderTypeId);
+    List<OrderCustomer> findByType_Id(Long orderTypeId);
 }

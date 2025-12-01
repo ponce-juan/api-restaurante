@@ -17,10 +17,10 @@ public class Customer extends Person
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 //One Customer can have many OrderCustomer
-    @OneToMany(
-        mappedBy = "customer",
-        cascade = CascadeType.ALL,
-        fetch = FetchType.LAZY,
-        orphanRemoval = true)
-    private List<OrderCustomer> orderCustomers = new ArrayList<>();
+//    @OneToMany(
+//        mappedBy = "customer",
+//        cascade = CascadeType.ALL,
+//        fetch = FetchType.LAZY,
+//        orphanRemoval = true)
+//    private List<OrderCustomer> orderCustomers = new ArrayList<>();
 }

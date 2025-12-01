@@ -9,7 +9,7 @@ import java.util.List;
 
 public record OrderCustomerResponse(
         Long id,
-        String client,
+//        String client,
         OrderTypeDTO type,
         OrderStatusDTO status,
         BigDecimal total,

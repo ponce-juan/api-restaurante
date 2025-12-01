@@ -8,7 +8,7 @@ import java.util.List;
 
 public record OrderCustomerRequest(
         Long id,
-        String client,
+//        String client,
         OrderTypeDTO type,
         List<ItemDTO> items,
         String status,

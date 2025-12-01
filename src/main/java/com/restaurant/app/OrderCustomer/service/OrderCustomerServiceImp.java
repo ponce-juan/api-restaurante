@@ -66,7 +66,7 @@
 //    public List<OrderCustomer> getOrderCustomersByStatusId (@NonNull Long orderStatusId)
 //    {
 //        return orderCustomerRepository
-//                   .findByOrderStatus_Id(orderStatusId)
+//                   .findByStatus_Id(orderStatusId)
 //                   .orElseThrow(() -> new EntityNotFoundException("OrderCustomers not found with status id: " + orderStatusId));
 //    }
 //
@@ -74,7 +74,7 @@
 //    public List<OrderCustomer> getOrderCustomersByStatusIdAndCustomerId (@NonNull Long orderStatusId,
 //                                                                       @NonNull Long customerId)
 //    {
-//        return orderCustomerRepository.findByOrderStatus_IdAndCustomer_Id(orderStatusId, customerId)
+//        return orderCustomerRepository.findByStatus_Id(orderStatusId, customerId)
 //                   .orElseThrow(
 //                       () -> new EntityNotFoundException("OrderCustomers not found with status id: " + orderStatusId + " and customer id: " + customerId)
 //                   );
@@ -84,7 +84,7 @@
 //    public List<OrderCustomer> getOrderCustomersByOrderTypeId (@NonNull Long orderTypeId)
 //    {
 //        return orderCustomerRepository
-//                   .findByOrderType_Id(orderTypeId)
+//                   .findByType_Id(orderTypeId)
 //                   .orElseThrow(
 //                       () -> new EntityNotFoundException("OrderCustomers not found with order type id: " + orderTypeId)
 //                   );
@@ -169,7 +169,7 @@ public class OrderCustomerServiceImp implements OrderCustomerService {
         // if (request.client() != null) { ... buscar por id o crear ... }
 
         OrderCustomer order = new OrderCustomer();
-        order.setCustomer(null); // o setear si buscás por id
+//        order.setCustomer(null); // o setear si buscás por id
         order.setType(orderType);
         order.setStatus(orderStatus);
         order.setOrderDate(LocalDateTime.now());
@@ -272,7 +272,7 @@ public class OrderCustomerServiceImp implements OrderCustomerService {
     @Override
     public List<OrderCustomerResponse> getOrderCustomersByStatusId(Long orderStatusId) {
         List<OrderCustomerResponse> list =
-                orderCustomerRepository.findByOrderStatus_Id(orderStatusId)
+                orderCustomerRepository.findByStatus_Id(orderStatusId)
                         .stream()
                         .map(OrderCustomerMapper::toResponse).toList();
 
@@ -283,21 +283,21 @@ public class OrderCustomerServiceImp implements OrderCustomerService {
         return list;
     }
 
-    @Override
-    public List<OrderCustomerResponse> getOrderCustomersByStatusIdAndCustomerId(Long orderStatusId, Long customerId) {
-        List<OrderCustomerResponse> list = orderCustomerRepository.findByOrderStatus_IdAndCustomer_Id(orderStatusId,
-                        customerId)
-                .stream()
-                .map(OrderCustomerMapper::toResponse).toList();
-        if (list.isEmpty()) {
-            throw new EntityNotFoundException("OrderCustomers not found with status id: " + orderStatusId + " and customer id: " + customerId);
-        }
-        return list;
-    }
+//    @Override
+//    public List<OrderCustomerResponse> getOrderCustomersByStatusIdAndCustomerId(Long orderStatusId, Long customerId) {
+////        List<OrderCustomerResponse> list = orderCustomerRepository.findByStatus_Id(orderStatusId,
+////                        customerId)
+//                .stream()
+//                .map(OrderCustomerMapper::toResponse).toList();
+//        if (list.isEmpty()) {
+//            throw new EntityNotFoundException("OrderCustomers not found with status id: " + orderStatusId + " and customer id: " + customerId);
+//        }
+//        return list;
+//    }
 
     @Override
     public List<OrderCustomerResponse> getOrderCustomersByOrderTypeId(Long orderTypeId) {
-        List<OrderCustomerResponse> list = orderCustomerRepository.findByOrderType_Id(orderTypeId)
+        List<OrderCustomerResponse> list = orderCustomerRepository.findByType_Id(orderTypeId)
                 .stream()
                 .map(OrderCustomerMapper::toResponse).toList();
 

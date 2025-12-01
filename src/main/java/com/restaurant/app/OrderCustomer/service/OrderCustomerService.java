@@ -37,7 +37,7 @@ public interface OrderCustomerService {
 
     List<OrderCustomerResponse> getOrderCustomersByStatusId(Long orderStatusId);
 
-    List<OrderCustomerResponse> getOrderCustomersByStatusIdAndCustomerId(Long orderStatusId, Long customerId);
+//    List<OrderCustomerResponse> getOrderCustomersByStatusIdAndCustomerId(Long orderStatusId, Long customerId);
 
     List<OrderCustomerResponse> getOrderCustomersByOrderTypeId(Long orderTypeId);
 

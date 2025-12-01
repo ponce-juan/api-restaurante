@@ -2,8 +2,8 @@ package com.restaurant.app.OrderCustomer.dto;
 
 import com.restaurant.app.OrderCustomer.entity.OrderCustomer;
 import com.restaurant.app.OrderItem.dto.ItemDTO;
-import com.restaurant.app.OrderStatus.dto.OrderStatusDTO;
-import com.restaurant.app.OrderType.dto.OrderTypeDTO;
+import com.restaurant.app.OrderStatus.dto.OrderStatusMapper;
+import com.restaurant.app.OrderType.dto.OrderTypeMapper;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,9 +11,9 @@ public class OrderCustomerMapper {
     public static OrderCustomerResponse toResponse(OrderCustomer entity){
         return new OrderCustomerResponse(
                 entity.getId(),
-                entity.getCustomer().getName(),
-                new OrderTypeDTO(entity.getType().getId(), entity.getType().toString()),
-                new OrderStatusDTO(entity.getStatus().getId(), entity.getStatus().toString()),
+//                entity.getCustomer() != null ? entity.getCustomer().getName() : "Guest",
+                OrderTypeMapper.toDTO(entity.getType()),
+                OrderStatusMapper.toDTO(entity.getStatus()),
                 entity.getTotalAmount(),
                 entity.getItems().stream()
                         .map(item -> new ItemDTO(item.getProduct().getName(), item.getQuantity(), item.getProduct().getPrice()))

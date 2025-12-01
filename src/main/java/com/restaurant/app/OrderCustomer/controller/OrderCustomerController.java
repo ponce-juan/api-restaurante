@@ -165,16 +165,16 @@ public class OrderCustomerController {
         }
     }
 
-    @GetMapping("/status/{orderStatusId}/customer/{customerId}")
-    public ResponseEntity<List<OrderCustomerResponse>> getOrderCustomerByStatusIdAndCustomerId(
-            @PathVariable Long orderStatusId,
-            @PathVariable Long customerId) {
-        try {
-            return ResponseEntity.ok(orderCustomerService.getOrderCustomersByStatusIdAndCustomerId(orderStatusId, customerId));
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
+//    @GetMapping("/status/{orderStatusId}/customer/{customerId}")
+//    public ResponseEntity<List<OrderCustomerResponse>> getOrderCustomerByStatusIdAndCustomerId(
+//            @PathVariable Long orderStatusId,
+//            @PathVariable Long customerId) {
+//        try {
+//            return ResponseEntity.ok(orderCustomerService.getOrderCustomersByStatusIdAndCustomerId(orderStatusId, customerId));
+//        } catch (EntityNotFoundException e) {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 
     @GetMapping("/type/{orderTypeId}")
     public ResponseEntity<List<OrderCustomerResponse>> getOrderCustomersByOrderTypeId(@PathVariable Long orderTypeId) {
@@ -204,6 +204,7 @@ public class OrderCustomerController {
             return ResponseEntity.badRequest().build();
         } catch (Exception e) {
             // fallback
+            e.printStackTrace();
             return ResponseEntity.status(500).build();
         }
     }
