@@ -13,20 +13,21 @@ import java.math.BigDecimal;
 @Table(name = "order_items")
 public class OrderItem
 {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
-    @EmbeddedId
-    private OrderItemId id;
+//    @EmbeddedId
+//    private OrderItemId id;
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long id;
 
 //Many OrderItem can have one OrderCustomer
-    @ManyToOne
-    @MapsId("orderCustomerId")
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "order_customer_id", nullable = false)
     private OrderCustomer orderCustomer;
+
 //Many OrderItem can have one Product
-    @ManyToOne
-    @MapsId("productId")
+    @ManyToOne(fetch=FetchType.LAZY)
+//    @MapsId("productId") //Field name in OrderItemId
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 

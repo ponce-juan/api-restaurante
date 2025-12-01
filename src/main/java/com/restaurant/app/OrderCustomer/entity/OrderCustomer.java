@@ -1,5 +1,6 @@
 package com.restaurant.app.OrderCustomer.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.restaurant.app.Customer.entity.Customer;
 import com.restaurant.app.OrderItem.entity.OrderItem;
 import com.restaurant.app.OrderStatus.entity.OrderStatus;
@@ -20,29 +21,31 @@ public class OrderCustomer
     @Id
     @GeneratedValue(strategy =GenerationType.IDENTITY)
     private Long id;
-//Many OrderCustomer can have one Customer
+
+    //Many OrderCustomer can have one Customer
     @ManyToOne
-    @JoinColumn(name="customer_id", nullable = false)
+    @JoinColumn(name="customer_id", nullable = true)
     private Customer customer;
-//Many OrderCustomer can have one OrderType
+
+    //Many OrderCustomer can have one OrderType
     @ManyToOne
-    @JoinColumn(
-        name="order_type_id",
-        nullable = false)
-    private OrderType orderType;
-//Many OrderCustomer can have one OrderStatus
+    @JoinColumn(name="order_type_id",nullable = false)
+    private OrderType type;
+
+    //Many OrderCustomer can have one OrderStatus
     @ManyToOne
-    @JoinColumn(
-        name="order_status_id",
-        nullable = false)
-    private OrderStatus orderStatus;
-// One OrderCustomer can have many OrderItems
+    @JoinColumn(name="order_status_id",nullable = false)
+    @JsonIgnore
+    private OrderStatus status;
+
+    // One OrderCustomer can have many OrderItems
     @OneToMany(
         mappedBy = "orderCustomer",
         cascade = CascadeType.ALL,
         fetch = FetchType.LAZY,
         orphanRemoval = true)
-    private List<OrderItem> orderItems = new ArrayList<>();
+    private List<OrderItem> items = new ArrayList<>();
+
 
     private LocalDateTime orderDate;
 
@@ -51,7 +54,7 @@ public class OrderCustomer
 
     public void calculateTotalAmount(){
         totalAmount = BigDecimal.ZERO;
-        for (OrderItem orderItem : orderItems) {
+        for (OrderItem orderItem : items) {
             totalAmount = totalAmount.add(orderItem.getSubTotal());
         }
     }

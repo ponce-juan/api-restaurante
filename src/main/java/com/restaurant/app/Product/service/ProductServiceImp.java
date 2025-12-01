@@ -58,10 +58,17 @@ public class ProductServiceImp implements ProductService
     }
 
     @Override
-    public ProductDTO updateProduct (Long id, Product product)
+    public ProductDTO updateProduct (Long id, ProductDTO product)
     {
         return ProductMapper.toDTO(productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found with id: " + id)));
+                        .map(p -> {
+                            p.setName(product.name());
+                            p.setDescription(product.description());
+                            p.setPrice(product.price());
+                            p.setStock(product.stock());
+                            return productRepository.save(p);
+                        })
+                        .orElseThrow(() -> new RuntimeException("Product not found with id: " + id)));
 //               return productRepository.findById(id).
 //                map(productDb -> {
 //                   productDb.setName(product.getName());

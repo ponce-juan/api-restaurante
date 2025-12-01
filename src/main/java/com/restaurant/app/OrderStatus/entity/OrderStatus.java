@@ -1,5 +1,6 @@
 package com.restaurant.app.OrderStatus.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.restaurant.app.OrderCustomer.entity.OrderCustomer;
 import com.restaurant.app.OrderStatus.model.OrderStatusEnum;
 import jakarta.persistence.*;
@@ -35,13 +36,14 @@ public class OrderStatus
 //    private String statusName;
     @Enumerated(EnumType.STRING)
     @Column(name = "status_name", nullable = false, unique = true)
-    private OrderStatusEnum statusName;
+    private OrderStatusEnum status;
 
     @OneToMany(
         mappedBy = "orderStatus",
         cascade = CascadeType.ALL,
         fetch = FetchType.LAZY,
         orphanRemoval = true)
+    @JsonIgnore
     private List<OrderCustomer> orders = new ArrayList<>();
 
 

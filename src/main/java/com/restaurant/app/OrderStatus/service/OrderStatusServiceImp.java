@@ -36,7 +36,7 @@ public class OrderStatusServiceImp implements OrderStatusService
     @Override
     public OrderStatus getOrderStatusByName (@NonNull OrderStatusEnum name)
     {
-        return orderStatusRepository.findByStatusName(name)
+        return orderStatusRepository.findByStatus(name)
                 .orElseThrow(() -> new EntityNotFoundException("Order status not found with name: " + name));
     }
 
@@ -44,8 +44,8 @@ public class OrderStatusServiceImp implements OrderStatusService
     public OrderStatus createOrderStatus (@NonNull OrderStatus orderStatus)
     {
         // Validar que el nombre del estado no exista
-        OrderStatusEnum statusEnum = orderStatus.getStatusName();
-        orderStatusRepository.findByStatusName(statusEnum)
+        OrderStatusEnum statusEnum = orderStatus.getStatus();
+        orderStatusRepository.findByStatus(statusEnum)
                 .ifPresent(existingStatus -> {
                     throw new IllegalArgumentException("Order status already exists with name: " + statusEnum.name());
                 });
@@ -61,11 +61,11 @@ public class OrderStatusServiceImp implements OrderStatusService
                 .orElseThrow(() -> new EntityNotFoundException("Order status not found with id: " + id));
 
         // Verifico si el nombre del estado ya existe
-        OrderStatusEnum statusEnum = orderStatus.getStatusName();
+        OrderStatusEnum statusEnum = orderStatus.getStatus();
         // Verifico que el nuevo estado no sea null
         if (statusEnum == null) throw new IllegalArgumentException("Order status cannot be null");
 
-        orderStatusRepository.findByStatusName(statusEnum)
+        orderStatusRepository.findByStatus(statusEnum)
                 .ifPresent(existingStatus -> {
                     if (!existingStatus.getId().equals(id)) {
                         throw new IllegalArgumentException("Order status already exists with name: " + statusEnum.name());
@@ -73,7 +73,7 @@ public class OrderStatusServiceImp implements OrderStatusService
                 });
 
         // Actualizo el estado
-        existingOrderStatus.setStatusName(statusEnum);
+        existingOrderStatus.setStatus(statusEnum);
 
         return orderStatusRepository.save(existingOrderStatus);
     }

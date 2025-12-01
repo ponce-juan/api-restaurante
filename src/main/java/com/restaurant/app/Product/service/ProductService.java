@@ -11,7 +11,7 @@ public interface ProductService
     List<ProductDTO> getAllProducts();
     ProductDTO getProductById(Long id);
     ProductDTO createProduct(Product product);
-    ProductDTO updateProduct(Long id, Product product);
+    ProductDTO updateProduct(Long id, ProductDTO product);
     void deleteProduct(Long id);
 
     // Otras operaciones extras
